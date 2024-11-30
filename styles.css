@@ -1,0 +1,311 @@
+/* Global Styles */
+* {
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff; /* Neutral background */
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+/* Header and Nav */
+header {
+    background: linear-gradient(90deg, #ff7f50, #ff6f20);
+    padding: 15px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    opacity: 0.95;
+    transition: opacity 0.3s ease-in-out;
+}
+
+header:hover {
+    opacity: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffeb3b;
+    transform: translateY(-3px);
+}
+
+nav a:focus {
+    outline: 2px dashed #ffeb3b;
+}
+
+/* Headings */
+h1, h2 {
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #ff6f20; /* Darker orange for headings */
+}
+
+p {
+    line-height: 1.7;
+    margin: 15px 0;
+}
+
+/* Updated Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Ensure all cards are equal in width */
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* Updated Product Card */
+.product-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 220px; /* Fixed width */
+    height: 350px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    margin: auto;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Image Hover Effects */
+.product-card img {
+    max-width: 100%;
+    height: 150px; /* Fixed height for images */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.product-card p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(90deg, #ff7f50, #ff6f20);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ff6f20, #ff7f50);
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-button {
+    background: #f4f4f4;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.secondary-button:hover {
+    background: #ddd;
+}
+
+/* Forms */
+#form-container {
+    max-width: 400px; /* Limit the width of the form */
+    margin: 50px auto; /* Center the form with a top margin */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners for the container */
+    background-color: #ffffff; /* White background for the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#form-container h2 {
+    text-align: center;
+    color: #ff6f20; /* Matching heading color */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+label {
+    font-weight: bold; /* Bold labels for better readability */
+    margin: 10px 0 5px; /* Space around labels */
+    color: #555; /* Slightly darker color for contrast */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+textarea {
+    padding: 12px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    margin-bottom: 15px; /* Space between input fields */
+    font-size: 1rem; /* Consistent font size */
+}
+
+textarea {
+    min-height: 100px; /* Ensures a decent height for text areas */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+input:focus,
+textarea:focus {
+    border-color: #ff6f20; /* Orange border on focus */
+    box-shadow: 0 0 5px rgba(255, 111, 32, 0.5); /* Glow effect */
+    outline: none; /* Remove default outline */
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background: linear-gradient(90deg, #ff7f50, #ff6f20); /* Gradient background */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    margin-top: 10px; /* Space above the button */
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #ff6f20, #ff7f50); /* Reverse gradient on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Success/Error Messages */
+.success-message,
+.error-message {
+    text-align: center; /* Center messages */
+    font-size: 0.9rem; /* Smaller font size */
+    margin: 10px 0; /* Space around messages */
+}
+
+.success-message {
+    color: green; /* Green for success messages */
+}
+
+.error-message {
+    color: red; /* Red for error messages */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 0.9rem;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Keyframes for Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: 100%;
+        height: auto;
+    }
+
+    .product-card img {
+        height: auto;
+    }
+
+    #form-container {
+        margin: 20px; /* Reduced margin for smaller screens */
+        padding: 20px; /* Reduced padding */
+    }
+
+    #form-container h2 {
+        font-size: 1.5rem; /* Smaller heading on mobile */
+    }
+}

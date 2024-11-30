@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>User Profile</title>
+    <style>
+        /* Basic CSS for better layout */
+        :root {
+            --primary-color: rgb(255, 134, 35);
+            --hover-color: #e69500;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        #form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: var(--hover-color);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>GroceryMart</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <center><h2 id="form-title">Register</h2></center>
+        <div id="form-container">
+            <!-- Registration Form for New Users -->
+            <form id="registration-form">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+                <label for="reg-email">Email:</label>
+                <input type="email" id="reg-email" placeholder="Enter your email" required>
+
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" placeholder="Create a password" required>
+
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" placeholder="Re-enter your password" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+                <label for="address">Shipping Address (optional):</label>
+                <input type="text" id="address" placeholder="Enter your shipping address">
+
+                <button type="submit">Register</button>
+                <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+            </form>
+
+            <!-- Login Form for Existing Users -->
+            <form id="login-form" style="display: none;">
+                <label for="email">Email/Username:</label>
+                <input type="text" id="email" placeholder="Enter your email or username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+
+                <label>
+                    <input type="checkbox"> Remember Me
+                </label>
+
+                <button type="submit">Login</button>
+                <p><a href="#">Forgot your password?</a></p>
+                <p>Don't have an account? <a href="#" id="show-register">Register here</a></p>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Grocery Store</p>
+    </footer>
+
+    <script>
+        // JavaScript to toggle between forms
+        const showLoginLink = document.getElementById('show-login');
+        const showRegisterLink = document.getElementById('show-register');
+        const loginForm = document.getElementById('login-form');
+        const registrationForm = document.getElementById('registration-form');
+        const formTitle = document.getElementById('form-title');
+
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'block';
+            registrationForm.style.display = 'none';
+            formTitle.textContent = 'Login';
+        });
+
+        showRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registrationForm.style.display = 'block';
+            formTitle.textContent = 'Register';
+        });
+
+        // Handle registration form submission
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullname').value;
+            const email = document.getElementById('reg-email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            // Store user info in localStorage
+            localStorage.setItem('userName', fullName);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userAddress', address);
+
+            // Show success alert
+            alert('Registration successful!');
+
+            // Clear the form
+            registrationForm.reset();
+        });
+
+        // Display the registration form by default
+        window.onload = function() {
+            registrationForm.style.display = 'block';
+            loginForm.style.display = 'none';
+        };
+    </script>
+</body>
+</html>

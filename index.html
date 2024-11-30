@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Online Grocery Store</title>
+</head>
+<body>
+    <script src="app.js"></script>
+    <header>
+        <nav>
+            <h1>GroceryMart</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search">
+            <input type="text" id="search-input" placeholder="Search products...">
+            <button id="search-button">Search</button>
+        </section>
+
+        <section class="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product-grid" id="product-grid">
+                <div class="product-card" data-name="Butter" data-price="10" data-id="1">
+                    <img src="./images/butter.jpg" alt="Butter">
+                    <h3>Butter</h3>
+                    <p>$10.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Rice" data-price="15" data-id="2">
+                    <img src="./images/rice.jpg" alt="Rice">
+                    <h3> Rice</h3>
+                    <p>$15.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Sugar" data-price="15" data-id="3">
+                    <img src="./images/sugar.jpg" alt="Sugar">
+                    <h3>Sugar</h3>
+                    <p>$15.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Tea" data-price="12" data-id="4">
+                    <img src="./images/tea.jpg" alt="Tea">
+                    <h3>Tea</h3>
+                    <p>$12.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Paper" data-price="5" data-id="5">
+                    <img src="./images/paper.jpg" alt="Paper">
+                    <h3>Paper</h3>
+                    <p>$5.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Coffee" data-price="20" data-id="6">
+                    <img src="./images/coffee.jpg" alt="Coffee">
+                    <h3>Coffee</h3>
+                    <p>$20.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Salt" data-price="1" data-id="7">
+                    <img src="./images/salt.jpg" alt="Salt">
+                    <h3>Salt</h3>
+                    <p>$1.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Sauce" data-price="3" data-id="8">
+                    <img src="./images/sauce.jpg" alt="Sauce">
+                    <h3>Sauce</h3>
+                    <p>$3.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Spices" data-price="4" data-id="9">
+                    <img src="./images/spices.jpg" alt="Spices">
+                    <h3>Spices</h3>
+                    <p>$4.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Soap" data-price="2" data-id="10">
+                    <img src="./images/soap.jpg" alt="Soap">
+                    <h3>Soap</h3>
+                    <p>$2.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Shampoo" data-price="7" data-id="11">
+                    <img src="./images/shampoo.jpg" alt="Shampoo">
+                    <h3>Shampoo</h3>
+                    <p>$7.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Almond" data-price="12" data-id="12">
+                    <img src="./images/almond.jpg" alt="Almond">
+                    <h3>Almond</h3>
+                    <p>$12.00</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card" data-name="Chips" data-price="1.5" data-id="13">
+                    <img src="./images/chips.jpg" alt="Chips">
+                    <h3>Chips</h3>
+                    <p>$1.50</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <!-- More products can be added here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Grocery Store</p>
+    </footer>
+
+    <script>
+        // JavaScript for handling cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const product = {
+                    id: productCard.dataset.id,
+                    name: productCard.dataset.name,
+                    price: productCard.dataset.price,
+                    quantity: 1
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                const existingProduct = cart.find(item => item.id === product.id);
+                if (existingProduct) {
+                    existingProduct.quantity++;
+                } else {
+                    cart.push(product);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${product.name} has been added to the cart!`);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const productGrid = document.getElementById('product-grid');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.dataset.name.toLowerCase();
+
+                // Show or hide product cards based on the search term
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';  // Show product card
+                } else {
+                    card.style.display = 'none';   // Hide product card
+                }
+            });
+        });
+
+        // Optional: Allow search on pressing Enter
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+    </script>
+</body>
+</html>

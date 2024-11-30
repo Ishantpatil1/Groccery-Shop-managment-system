@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Checkout - Online Grocery Store</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>GroceryMart</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <label for="shipping-address">Shipping Address:</label>
+            <input type="text" id="shipping-address" required>
+
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method" required>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank-transfer">Bank Transfer</option>
+            </select>
+
+            <button type="submit">Place Order</button>
+        </form>
+
+        <div id="order-summary">
+            <h3>Order Summary</h3>
+            <p id="summary-total">Total: $0.00</p>
+        </div>
+
+        <!-- Billing Section -->
+        <section id="billing-section" style="display: none;">
+            <h3>Billing Information</h3>
+            <p><strong>Name:</strong> <span id="billing-name"></span></p>
+            <p><strong>Email:</strong> <span id="billing-email"></span></p>
+            <p><strong>Phone:</strong> <span id="billing-phone"></span></p>
+            <p><strong>Shipping Address:</strong> <span id="billing-address"></span></p>
+            <h4>Order Details</h4>
+            <ul id="billing-details"></ul>
+            <p><strong>Total Amount:</strong> <span id="billing-total"></span></p>
+            <p><strong>Payment Method:</strong> <span id="billing-payment"></span></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Grocery Store</p>
+    </footer>
+
+    <script>
+        // Load user info from profile data stored in localStorage
+        function loadBillingInfo() {
+            const userName = localStorage.getItem('userName') || 'Guest';
+            const userEmail = localStorage.getItem('userEmail') || 'Not provided';
+            const userPhone = localStorage.getItem('userPhone') || 'Not provided';
+            document.getElementById('billing-name').innerText = userName;
+            document.getElementById('billing-email').innerText = userEmail;
+            document.getElementById('billing-phone').innerText = userPhone;
+        }
+
+        // Load cart data for checkout and display order summary
+        function loadOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const summaryTotal = document.getElementById('summary-total');
+            const billingDetailsList = document.getElementById('billing-details');
+            let totalAmount = 0;
+
+            billingDetailsList.innerHTML = ''; // Clear previous items
+
+            // Loop through cart items to calculate total and populate details
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+
+                // Add each item to the order details
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.name} (Quantity: ${item.quantity}) - $${itemTotal.toFixed(2)}`;
+                billingDetailsList.appendChild(listItem);
+            });
+
+            // Update total summary and billing total
+            summaryTotal.innerText = `Total: $${totalAmount.toFixed(2)}`;
+            document.getElementById('billing-total').innerText = `$${totalAmount.toFixed(2)}`;
+        }
+
+        // Handle form submission for checkout
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const shippingAddress = document.getElementById('shipping-address').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            // Update billing information
+            document.getElementById('billing-address').innerText = shippingAddress;
+            document.getElementById('billing-payment').innerText = paymentMethod;
+
+            // Show the billing section with the updated data
+            document.getElementById('billing-section').style.display = 'block';
+
+            // Confirmation and cart clearance
+            alert('Your order has been placed successfully!');
+            localStorage.removeItem('cart'); // Clear the cart
+        });
+
+        // Load billing and order summary on page load
+        window.onload = function() {
+            loadBillingInfo();
+            loadOrderSummary();
+        };
+    </script>
+</body>
+</html>
